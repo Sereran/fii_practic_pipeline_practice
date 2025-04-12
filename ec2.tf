@@ -5,9 +5,10 @@ module "ec2_instance" {
 
   name = "oidc-instance"
 
+
   instance_type               = "t2.micro"
   subnet_id                   = module.vpc.public_subnets[0]
-  iam_instance_profile        = aws_iam_instance_profile.ec2_ssm_profile_oidc_module.name
+  iam_instance_profile        = aws_iam_instance_profile.ec2_ssm_profile_oidc_module_11.name
   ami                         = var.ami
   vpc_security_group_ids      = [aws_security_group.ssm_and_http.id]
   associate_public_ip_address = true
@@ -23,7 +24,7 @@ module "ec2_private_instance" {
 
   instance_type               = "t2.micro"
   subnet_id                   = module.vpc.private_subnets[0]
-  iam_instance_profile        = aws_iam_instance_profile.ec2_ssm_profile_oidc_module.name
+  iam_instance_profile        = aws_iam_instance_profile.ec2_ssm_profile_oidc_module_11.name
   ami                         = var.ami
   vpc_security_group_ids      = [aws_security_group.ssm_only.id]
   associate_public_ip_address = false
@@ -56,8 +57,8 @@ resource "aws_iam_role_policy_attachment" "ssm_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
-resource "aws_iam_instance_profile" "ec2_ssm_profile_oidc_module" {
-  name = "EC2_SSM_Profile_OIDC_module"
+resource "aws_iam_instance_profile" "ec2_ssm_profile_oidc_module_11" {
+  name = "EC2_SSM_Profile_OIDC_module_11"
   role = aws_iam_role.ec2_ssm_role_module.name
 }
 
